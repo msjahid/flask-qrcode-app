@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>QR Code Generator</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+ <div class="login">
+	<h3 id="h3-font">QR Code Generator</h3>
+     <form action="{{ url_for('generate')}}"method="post">
+        <input type="text" name="url_link" placeholder="Enter your URL" required="required" />
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Generate</button>
+    </form>
+     <br>
+     <br>
+     <img src="static/img/qrcode.png" alt="qrcode">
+     <br>
+     <br>
+
+     <a href="{{ url_for('index') }}"><button type="submit" class="btn btn-primary custom">Reset</button></a>
+     <a href="{{ url_for('downloadFile') }}"><button type="submit" class="btn btn-primary custom">Download</button></a>
+     <footer>
+         <p id="ludwig">©copyright: <a href="https://ludwigpfeiffer.com/" target="_blank" >Ludwig Pfeiffer</a><br></p>
+    </footer>
+ </div>
+
+</body>
+</html>
