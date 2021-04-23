@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, send_from_directory, send_fil
 from pathlib import Path
 import qrcode
 import os
-import numpy as np
-
 app = Flask(__name__, static_url_path='/static')
 
 qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=50)
@@ -16,12 +14,11 @@ def index():
 
 @app.route('/generate', methods=['POST'])
 def generate():
-    linkData = [x for x in request.form.values()]
-    finalLink = [np.array(linkData)]
-    qr.add_data(finalLink)
+    linkData = request.form['url_link']
+    qr.add_data(linkData)
     qr.make(fit=True)
     img = qr.make_image(fill_color="black", back_color="white")
-    img.save("static/img/qrcode.png")
+    img.save("qrcode.png")
     return render_template('index.html')
 
 
@@ -32,7 +29,7 @@ def generate():
 
 @app.route('/download')
 def downloadFile():
-    file = "static/img/qrcode.png"
+    file = "qrcode.png"
     return send_file(file, as_attachment=True)
 
 
